@@ -1,0 +1,291 @@
+<head>
+  <title>PennApps Registration</title>
+  <link rel="stylesheet" type="text/css" href="http://2014s.pennapps.com/assets/css/fonts/font.css">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+
+<body>
+  <div class='container'>
+    {{> main}}
+  </div>
+</body>
+
+<template name="main">
+  <h1><a href='http://2014s.pennapps.com'>PennApps Spring 2014 Registration</a></h1>
+  <h2>Congrats on your acceptance!</h2>
+  {{#if currentUser }}
+    <h2>You're logged in as {{ email }} <button class='logout btn btn-default'>Log out</button></h2>
+    {{> application }}
+  {{else}}
+    {{#if login}}
+      {{#if forgot}}
+      {{> forgot }}
+      {{else}}
+      {{> login }}
+      {{/if}}
+    {{else}}
+    {{> register }}
+    {{/if}}
+  {{/if}}
+  <div class='questions'>
+    <p>Questions? Email <a href="mailto:contact@pennapps.com">contact@pennapps.com</a></p>
+  </div>
+</template>
+
+<template name='forgot'>
+<form id='forgot' class='form-horizontal'>
+  <div class="form-group">
+    <label for="email" class="col-sm-3 control-label">Email</label>
+    <div class="col-sm-9">
+      <input type="email" class="form-control" name='email' placeholder="Email">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" class="btn btn-default">Reset Password</button>
+      <a href='#' class='forgot'>Cancel</a>
+    </div>
+  </div>
+</form>
+</template>
+
+<template name='login'>
+<form id='login' class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="email" class="col-sm-3 control-label">Email</label>
+    <div class="col-sm-9">
+      <input type="email" class="form-control" name='email' placeholder="Email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password" class="col-sm-3 control-label">Password</label>
+    <div class="col-sm-9">
+      <input type="password" class="form-control" name='password' placeholder="Password">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" class="btn btn-default">Log in</button>
+      <a href='#' class='forgot'>Forgot your password?</a>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <a href='#' class='switch'>Haven't registered yet?</a>
+    </div>
+  </div>
+</form>
+</template>
+
+<template name='register'>
+<form id='register' class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="email" class="col-sm-3 control-label">Email</label>
+    <div class="col-sm-9">
+      <input type="email" class="form-control" name='email' placeholder="Email">
+      <p class="help-block">Make sure to use the same exact email that the acceptance email was sent to.</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password" class="col-sm-3 control-label">Password</label>
+    <div class="col-sm-9">
+      <input type="password" class="form-control" name='password' placeholder="Password">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="confirm" class="col-sm-3 control-label">Confirm Password</label>
+    <div class="col-sm-9">
+      <input type="password" class="form-control" name='confirm' placeholder="Confirm Password">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" class="btn btn-default">Register</button>
+      <a href='#' class='switch'>Already have an account?</a>
+    </div>
+  </div>
+</form>
+</template>
+
+<template name='application'>
+{{#with application}}
+<form id='application'>
+  <fieldset>
+    <legend>
+      Personal Information
+    </legend>
+
+    <div class="form-group">
+      <label class="control-label col-sm-3">
+        Are you coming to PennApps?
+      </label>
+      <div class="col-sm-9">
+        <div class="radio">
+          <label><input {{ checked coming "yes" }} type="radio" name="coming" value="yes">Yes</label>
+        </div>
+        <div class="radio">
+          <label><input {{ checked coming "no" }} type="radio" name="coming" value='no'>No</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-3">
+        T-Shirt Size
+      </label>
+      <div class="col-sm-9">
+        <div>
+          <label class='radio-inline'><input {{ checked shirt "xsF" }} type="radio" name="shirt" value="xsF">XS (Female)</label>
+          <label class='radio-inline'><input {{ checked shirt "sF" }} type="radio" name="shirt" value="sF">S (Female)</label>
+          <label class='radio-inline'><input {{ checked shirt "mF" }} type="radio" name="shirt" value="mF">M (Female)</label>
+          <label class='radio-inline'><input {{ checked shirt "lF" }} type="radio" name="shirt" value="lF">L (Female)</label>
+        </div>
+        <div>
+          <label class='radio-inline'><input {{ checked shirt "xsM" }} type="radio" name="shirt" value="xsM">XS (Male)</label>
+          <label class='radio-inline'><input {{ checked shirt "sM" }} type="radio" name="shirt" value="sM">S (Male)</label>
+          <label class='radio-inline'><input {{ checked shirt "mM" }} type="radio" name="shirt" value="mM">M (Male)</label>
+          <label class='radio-inline'><input {{ checked shirt "lM" }} type="radio" name="shirt" value="lM">L (Male)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-3">
+        Dietary Restrictions (if applicable)
+      </label>
+      <div class="col-sm-9">
+        <input class="form-control" id="name" name="diet" size="30" type="text" value='{{ diet }}'/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-3">
+        Do you need a place to stay Sunday night?
+      </label>
+      <div class="col-sm-9">
+        <div class="radio">
+          <label><input {{ checked sunday "yes" }} type="radio" name="sunday" value="yes">Yes</label>
+        </div>
+        <div class="radio">
+          <label><input {{ checked sunday "no" }} type="radio" name="sunday" value='no'>No</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-3">Liability Waiver</label>
+      <div class="col-sm-9">
+        <a class='btn btn-default' target='_blank' href='/liability.pdf'>Download Liability Waiver</a>
+        <button class='liabilitypicker btn btn-primary'>Upload your signed copy</button>
+        <span id='liability_name'>{{ liability_name }}</span>
+        <input type='hidden' value='{{ liability_url }}' name='liability_url'>
+        <input type='hidden' value='{{ liability_name }}' name='liability_name'>
+      </div>
+    </div>
+
+    <div class="form-group-other">
+      <label class='form-textarea-label'> 
+        We will be providing components or sensors for those interested in hardware hacking. If you’re planning on doing some sort of hardware hack, what kind of hardware do you anticipate needing?
+      </label>
+      <div>
+        <textarea class="form-control" id='hardware' name="hardware" >{{ hardware }}</textarea>
+      </div>
+    </div>
+
+  </fieldset>
+
+  <fieldset>
+    <legend>
+      Skill Set
+    </legend>
+
+    <div class="form-group">
+      <label class="control-label col-sm-3">
+        What kind of developer are you?
+      </label>
+      <div class="col-sm-9">
+        <div class="checkbox">
+          <label><input {{ checkedArray developer "frontend" }} name='developer' value='frontend' type="checkbox">Front-End</label>
+        </div>
+        <div class="checkbox">
+          <label><input {{ checkedArray developer "backend" }} name='developer' value='backend' type="checkbox">Back-End</label>
+        </div>
+        <div class="checkbox">
+          <label><input {{ checkedArray developer "designer" }} name='developer' value='designer' type="checkbox">Designer</label>
+        </div>
+        <div class="checkbox">
+          <label><input {{ checkedArray developer "android" }} name='developer' value='android' type="checkbox">Android</label>
+        </div>
+        <div class="checkbox">
+          <label><input {{ checkedArray developer "ios" }} name='developer' value='ios' type="checkbox">iOS</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-3">
+        Resume
+      </label>
+      <div class="col-sm-9">
+        <button class='resumepicker btn btn-default'>Upload your resume</button>
+        <span id='resume_name'>{{ resume_name }}</span>
+        <input type='hidden' value='{{ resume_url }}' name='resume_url'>
+        <input type='hidden' value='{{ resume_name }}' name='resume_name'>
+      </div>
+    </div>
+
+
+   <div class="form-group">
+      <label class="control-label col-sm-3">
+        Do you already have a job/internship lined up for the summer?
+      </label>
+      <div class="col-sm-9">
+        <div class="radio">
+          <label><input {{ checked job "yes" }} type="radio" name="job" value="yes">Yes</label>
+        </div>
+        <div class="radio">
+          <label><input {{ checked job "no" }} type="radio" name="job" value='no'>No</label>
+        </div>
+      </div>
+    </div>
+
+  </fieldset>
+
+  <fieldset>
+    <legend>
+      Travel Reimbursement (Please download, sign, and re-upload each applicable form)
+    </legend>
+
+    {{#each forms}}
+    <div class="form-group">
+      <label class="control-label col-sm-3">
+        {{ display_name }}
+      </label>
+      <div class="col-sm-9">
+        {{#if url}}
+        <a class='btn btn-default' target='_blank' href='{{ url }}'>Download {{ display_name }}</a>
+        {{/if}}
+        <button class='{{ name }}picker btn btn-primary'>{{ description }}</button>
+        <span id='{{ name }}_name'>{{ get name "_name" .. default }}</span>
+        <input type='hidden' value='{{ get name "_url" .. "" }}' name='{{ name }}_url'>
+        <input type='hidden' value='{{ get name "_name" .. default }}' name='{{ name }}_name'>
+      </div>
+    </div>
+    {{/each}}
+
+  </fieldset>
+
+  <fieldset>
+    {{#if submitted}}
+    <div class="alert alert-success">Registration Form has been saved.</div>        
+    {{else}}
+    <div class="form-group">
+      <div class="col-sm-9 col-sm-1">
+        <input class="btn btn-primary" name="commit" type="submit" value="Save Registration Form" />
+      </div>
+    </div>
+    {{/if}}
+  </fieldset>
+</form>
+{{/with}}
+</template>
